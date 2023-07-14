@@ -23,8 +23,8 @@ datasets:
 # wandb configuration
 wandb:
   enabled: true
-  entity: null
-  project: "Pythia_DPO"
+  entity: "pythia_dpo"
+  project: "Pythia70m"
 
 # to create the local run directory and cache models/datasets,
 #   we will try each of these directories in order; if none exist,
@@ -48,7 +48,7 @@ do_first_eval: true
 local_run_dir: ${get_local_run_dir:${exp_name},${local_dirs}}
 
 # the learning rate
-lr: 5e-7
+lr: 1e-6
 
 # number of steps to accumulate over for each batch
 #   (e.g. if batch_size=4 and gradient_accumulation_steps=2, then we will
