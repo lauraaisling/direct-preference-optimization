@@ -2,7 +2,7 @@
 seed: 0
 
 # name for this experiment in the local run directory and on wandb
-exp_name: ???
+exp_name: Pythia70m_SFT
 
 # the batch size for training; for FSDP, the batch size per GPU is batch_size / (grad_accumulation_steps * num_gpus)
 batch_size: 4
@@ -24,7 +24,7 @@ datasets:
 wandb:
   enabled: true
   entity: null
-  project: "direct-preference-optimization"
+  project: "Pythia_DPO"
 
 # to create the local run directory and cache models/datasets,
 #   we will try each of these directories in order; if none exist,
