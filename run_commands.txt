@@ -1,4 +1,4 @@
 run_commands
 70m 
-python -u train.py model=pythia70m datasets=[hh] loss=sft exp_name=anthropic_dpo_pythia70m gradient_accumulation_steps=2 batch_size=64 eval_batch_size=32 trainer=FSDPTrainer sample_during_eval=false model.fsdp_policy_mp=bfloat16 
-python -u train.py model=pythia70m datasets=[hh] loss=dpo loss.beta=0.1 model.archive=.cache/laura/anthropic_dpo_pythia70m_2023-07-13_21-28-34_186124/step-159744/policy.pt exp_name=anthropic_dpo_pythia70m gradient_accumulation_steps=2 batch_size=32 eval_batch_size=32 trainer=FSDPTrainer sample_during_eval=false
+python -u train.py model.fsdp_policy_mp=bfloat16 
+python -u train.py loss.beta=0.1 model.archive=... batch_size=32 
