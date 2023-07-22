@@ -1,3 +1,4 @@
 .cache
 __pycache__
 outputs
+.ipynb_checkpoints
