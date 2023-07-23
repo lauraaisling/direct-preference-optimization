@@ -2,7 +2,7 @@
 seed: 0
 
 # name for this experiment in the local run directory and on wandb
-exp_name: pythia160m_hh_ga4_sft ###
+exp_name: pythia1_hh_ga4_sft ###
 
 # the batch size for training; for FSDP, the batch size per GPU is batch_size / (grad_accumulation_steps * num_gpus)
 batch_size: 64 
@@ -93,5 +93,5 @@ minimum_log_interval_secs: 1.0
 
 defaults:
 - _self_
-- model: pythia160m # basic model configuration
+- model: pythia1 # basic model configuration
 - loss: sft # which loss function, either sft or dpo (specify loss.beta if using dpo)
