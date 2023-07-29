@@ -1,0 +1,430 @@
+bootstrapping for stddev: perplexity
+{
+  "results": {
+    "arc_challenge": {
+      "acc,none": 0.18515358361774745,
+      "acc_stderr,none": 0.011350774438389694,
+      "acc_norm,none": 0.21331058020477817,
+      "acc_norm_stderr,none": 0.011970971742326334
+    },
+    "arc_easy": {
+      "acc,none": 0.382996632996633,
+      "acc_stderr,none": 0.009974920384536484,
+      "acc_norm,none": 0.3707912457912458,
+      "acc_norm_stderr,none": 0.00991129282205692
+    },
+    "boolq": {
+      "acc,none": 0.5510703363914373,
+      "acc_stderr,none": 0.008699318031464162
+    },
+    "hellaswag": {
+      "acc,none": 0.264389563831906,
+      "acc_stderr,none": 0.004401063265803198,
+      "acc_norm,none": 0.27155945030870343,
+      "acc_norm_stderr,none": 0.004438549152538001
+    },
+    "lambada_openai": {
+      "perplexity,none": 708.6120565245322,
+      "perplexity_stderr,none": 41.92659162840902,
+      "acc,none": 0.1500097030855812,
+      "acc_stderr,none": 0.004974835589564718
+    },
+    "openbookqa": {
+      "acc,none": 0.14,
+      "acc_stderr,none": 0.015533272840269651,
+      "acc_norm,none": 0.236,
+      "acc_norm_stderr,none": 0.019008699622084728
+    },
+    "piqa": {
+      "acc,none": 0.5984766050054406,
+      "acc_stderr,none": 0.011437324373397841,
+      "acc_norm,none": 0.5930359085963003,
+      "acc_norm_stderr,none": 0.011462093919190166
+    },
+    "sciq": {
+      "acc,none": 0.619,
+      "acc_stderr,none": 0.015364734787007436,
+      "acc_norm,none": 0.584,
+      "acc_norm_stderr,none": 0.0155944601441406
+    },
+    "wikitext": {
+      "word_perplexity,none": 195.77496132792564,
+      "byte_perplexity,none": 2.386753581920647,
+      "bits_per_byte,none": 1.2550496244455038
+    },
+    "winogrande": {
+      "acc,none": 0.5288082083662194,
+      "acc_stderr,none": 0.01402914161590961
+    }
+  },
+  "configs": {
+    "arc_challenge": {
+      "task": "arc_challenge",
+      "group": [
+        "ai2_arc",
+        "multiple_choice"
+      ],
+      "dataset_path": "ai2_arc",
+      "dataset_name": "ARC-Challenge",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "Question: {{question}}\nAnswer:",
+      "doc_to_target": "{{choices.label.index(answerKey)}}",
+      "doc_to_choice": "{{choices.text}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "Question: {{question}}\nAnswer:"
+    },
+    "arc_easy": {
+      "task": "arc_easy",
+      "group": [
+        "ai2_arc",
+        "multiple_choice"
+      ],
+      "dataset_path": "ai2_arc",
+      "dataset_name": "ARC-Easy",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "Question: {{question}}\nAnswer:",
+      "doc_to_target": "{{choices.label.index(answerKey)}}",
+      "doc_to_choice": "{{choices.text}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "Question: {{question}}\nAnswer:"
+    },
+    "boolq": {
+      "task": "boolq",
+      "group": [
+        "super-glue-lm-eval-v1"
+      ],
+      "dataset_path": "super_glue",
+      "dataset_name": "boolq",
+      "training_split": "train",
+      "validation_split": "validation",
+      "doc_to_text": "{{passage}}\nQuestion: {{question}}?\nAnswer:",
+      "doc_to_target": "label",
+      "doc_to_choice": [
+        "no",
+        "yes"
+      ],
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc"
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "passage"
+    },
+    "hellaswag": {
+      "task": "hellaswag",
+      "group": [
+        "multiple_choice"
+      ],
+      "dataset_path": "hellaswag",
+      "training_split": "train",
+      "validation_split": "validation",
+      "doc_to_text": "{% set text = activity_label ~ ': ' ~ ctx_a ~ ' ' ~ ctx_b.capitalize() %}{{text|trim|replace(' [title]', '. ')|regex_replace('\\[.*?\\]', '')|replace('  ', ' ')}}",
+      "doc_to_target": "{{label}}",
+      "doc_to_choice": "{{endings|map('trim')|map('replace', ' [title]', '. ')|map('regex_replace', '\\[.*?\\]', '')|map('replace', '  ', ' ')|list}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false
+    },
+    "lambada_openai": {
+      "task": "lambada_openai",
+      "group": [
+        "lambada",
+        "loglikelihood",
+        "perplexity"
+      ],
+      "dataset_path": "EleutherAI/lambada_openai",
+      "dataset_name": "default",
+      "test_split": "test",
+      "template_aliases": "",
+      "doc_to_text": "{{text.split(' ')[:-1]|join(' ')}}",
+      "doc_to_target": "{{' '+text.split(' ')[-1]}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "perplexity",
+          "aggregation": "perplexity",
+          "higher_is_better": false
+        },
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "loglikelihood",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "{{text}}"
+    },
+    "openbookqa": {
+      "task": "openbookqa",
+      "group": [
+        "multiple_choice"
+      ],
+      "dataset_path": "openbookqa",
+      "dataset_name": "main",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "question_stem",
+      "doc_to_target": "{{choices.label.index(answerKey.lstrip())}}",
+      "doc_to_choice": "{{choices.text}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "question_stem"
+    },
+    "piqa": {
+      "task": "piqa",
+      "group": [
+        "multiple_choice"
+      ],
+      "dataset_path": "piqa",
+      "training_split": "train",
+      "validation_split": "validation",
+      "doc_to_text": "Question: {{goal}}\nAnswer:",
+      "doc_to_target": "label",
+      "doc_to_choice": "{{[sol1, sol2]}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "goal"
+    },
+    "sciq": {
+      "task": "sciq",
+      "group": [
+        "multiple_choice"
+      ],
+      "dataset_path": "sciq",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "doc_to_text": "{{support.lstrip()}}\nQuestion: {{question}}\nAnswer:",
+      "doc_to_target": 3,
+      "doc_to_choice": "{{[distractor1, distractor2, distractor3, correct_answer]}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        },
+        {
+          "metric": "acc_norm",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "{{support}} {{question}}"
+    },
+    "wikitext": {
+      "task": "wikitext",
+      "group": [
+        "perplexity",
+        "loglikelihood_rolling"
+      ],
+      "dataset_path": "EleutherAI/wikitext_document_level",
+      "dataset_name": "wikitext-2-raw-v1",
+      "training_split": "train",
+      "validation_split": "validation",
+      "test_split": "test",
+      "template_aliases": "",
+      "doc_to_text": "",
+      "doc_to_target": "<function wikitext_detokenizer at 0x7fa675b9beb0>",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "word_perplexity"
+        },
+        {
+          "metric": "byte_perplexity"
+        },
+        {
+          "metric": "bits_per_byte"
+        }
+      ],
+      "output_type": "loglikelihood_rolling",
+      "repeats": 1,
+      "should_decontaminate": true,
+      "doc_to_decontamination_query": "{{page}}"
+    },
+    "winogrande": {
+      "task": "winogrande",
+      "dataset_path": "winogrande",
+      "dataset_name": "winogrande_xl",
+      "training_split": "train",
+      "validation_split": "validation",
+      "doc_to_text": "<function doc_to_text at 0x7fa675b9add0>",
+      "doc_to_target": "<function doc_to_target at 0x7fa675b9b250>",
+      "doc_to_choice": "<function doc_to_choice at 0x7fa675b9b490>",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "acc",
+          "aggregation": "mean",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "multiple_choice",
+      "repeats": 1,
+      "should_decontaminate": false
+    }
+  },
+  "versions": {
+    "arc_challenge": "Yaml",
+    "arc_easy": "Yaml",
+    "boolq": "Yaml",
+    "hellaswag": "Yaml",
+    "lambada_openai": "Yaml",
+    "openbookqa": "Yaml",
+    "piqa": "Yaml",
+    "sciq": "Yaml",
+    "wikitext": "Yaml",
+    "winogrande": "Yaml"
+  },
+  "config": {
+    "model": "hf",
+    "model_args": "pretrained=lomahony/eleuther-pythia70m-hh-dpo",
+    "num_fewshot": 5,
+    "batch_size": 16,
+    "batch_sizes": [],
+    "device": "cuda:0",
+    "use_cache": null,
+    "limit": null,
+    "bootstrap_iters": 100000
+  },
+  "git_hash": "4e44f0a"
+}
+hf (pretrained=lomahony/eleuther-pythia70m-hh-dpo), limit: None, num_fewshot: 5, batch_size: 16
+|     Task     |Version|Filter|    Metric     | Value  |   |Stderr |
+|--------------|-------|------|---------------|-------:|---|------:|
+|arc_challenge |Yaml   |none  |acc            |  0.1852|±  | 0.0114|
+|              |       |none  |acc_norm       |  0.2133|±  | 0.0120|
+|arc_easy      |Yaml   |none  |acc            |  0.3830|±  | 0.0100|
+|              |       |none  |acc_norm       |  0.3708|±  | 0.0099|
+|boolq         |Yaml   |none  |acc            |  0.5511|±  | 0.0087|
+|hellaswag     |Yaml   |none  |acc            |  0.2644|±  | 0.0044|
+|              |       |none  |acc_norm       |  0.2716|±  | 0.0044|
+|lambada_openai|Yaml   |none  |perplexity     |708.6121|±  |41.9266|
+|              |       |none  |acc            |  0.1500|±  | 0.0050|
+|openbookqa    |Yaml   |none  |acc            |  0.1400|±  | 0.0155|
+|              |       |none  |acc_norm       |  0.2360|±  | 0.0190|
+|piqa          |Yaml   |none  |acc            |  0.5985|±  | 0.0114|
+|              |       |none  |acc_norm       |  0.5930|±  | 0.0115|
+|sciq          |Yaml   |none  |acc            |  0.6190|±  | 0.0154|
+|              |       |none  |acc_norm       |  0.5840|±  | 0.0156|
+|wikitext      |Yaml   |none  |word_perplexity|195.7750|   |       |
+|              |       |none  |byte_perplexity|  2.3868|   |       |
+|              |       |none  |bits_per_byte  |  1.2550|   |       |
+|winogrande    |Yaml   |none  |acc            |  0.5288|±  | 0.0140|
+

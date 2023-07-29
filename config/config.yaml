@@ -95,3 +95,4 @@ defaults:
 - _self_
 - model: pythia1 # basic model configuration
 - loss: sft # which loss function, either sft or dpo (specify loss.beta if using dpo)
+
