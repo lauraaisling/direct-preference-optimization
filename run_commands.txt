@@ -1,4 +1,10 @@
-run_commands
-70m 
+log in wandb 
+check settings
 python -u train.py model.fsdp_policy_mp=bfloat16 
-python -u train.py loss.beta=0.1 model.archive=... batch_size=32 
+python -u train.py loss.beta=0.1 model.archive=.cache/laura/pythia12_hh_ga2_sft_policy_dtype_bfloat16_2023-08-03_13-06-56_410701/LATEST/policy.pt 
+
+python -u train.py loss.beta=0.1 model.archive=.cache/laura/pythia69_hh_ga2_sft_policy_dtype_bfloat16_2023-08-02_13-42-24_002307/LATEST/policy.pt  
+
+
+# try
+python upload.py ~/hf/eleuther-pythia28-hh-sft_old lomahony/eleuther-pythia2.8b-hh-sft main
