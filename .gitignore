@@ -2,3 +2,4 @@
 __pycache__
 outputs
 .ipynb_checkpoints
+gpt4_eval.ipynb

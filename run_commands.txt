@@ -8,3 +8,5 @@ python -u train.py loss.beta=0.1 model.archive=.cache/laura/pythia69_hh_ga2_sft_
 
 # try
 python upload.py ~/hf/eleuther-pythia28-hh-sft_old lomahony/eleuther-pythia2.8b-hh-sft main
+
+nohup python main.py --model hf --model_args pretrained=lomahony/eleuther-pythia410m-hh-sft --tasks lambada_openai,hellaswag,arc_easy,arc_challenge,wikitext,winogrande,piqa,boolq,openbookqa,sciq --num_fewshot 5 --device cuda:0 --batch_size 16 --output_path ~/direct-preference-optimization/model_eval_files/sft-pythia-410m-5shot > ~/direct-preference-optimization/model_eval_files/sft-pythia-410m-5shot-shelloutput.txt &
