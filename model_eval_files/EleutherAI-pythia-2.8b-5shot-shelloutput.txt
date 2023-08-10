@@ -1,0 +1,24 @@
+bootstrapping for stddev: perplexity
+hf (pretrained=EleutherAI/pythia-2.8b), limit: None, num_fewshot: 5, batch_size: 8
+|     Task     |Version|Filter|    Metric     | Value |   |Stderr|
+|--------------|-------|------|---------------|------:|---|-----:|
+|arc_challenge |Yaml   |none  |acc            | 0.3123|±  |0.0135|
+|              |       |none  |acc_norm       | 0.3549|±  |0.0140|
+|arc_easy      |Yaml   |none  |acc            | 0.6700|±  |0.0096|
+|              |       |none  |acc_norm       | 0.6759|±  |0.0096|
+|boolq         |Yaml   |none  |acc            | 0.6664|±  |0.0082|
+|hellaswag     |Yaml   |none  |acc            | 0.4504|±  |0.0050|
+|              |       |none  |acc_norm       | 0.6031|±  |0.0049|
+|lambada_openai|Yaml   |none  |perplexity     | 6.4479|±  |0.1602|
+|              |       |none  |acc            | 0.5948|±  |0.0068|
+|openbookqa    |Yaml   |none  |acc            | 0.2480|±  |0.0193|
+|              |       |none  |acc_norm       | 0.3720|±  |0.0216|
+|piqa          |Yaml   |none  |acc            | 0.7427|±  |0.0102|
+|              |       |none  |acc_norm       | 0.7443|±  |0.0102|
+|sciq          |Yaml   |none  |acc            | 0.9440|±  |0.0073|
+|              |       |none  |acc_norm       | 0.9400|±  |0.0075|
+|wikitext      |Yaml   |none  |word_perplexity|20.0571|   |      |
+|              |       |none  |byte_perplexity| 1.6394|   |      |
+|              |       |none  |bits_per_byte  | 0.7132|   |      |
+|winogrande    |Yaml   |none  |acc            | 0.5943|±  |0.0138|
+

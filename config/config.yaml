@@ -11,7 +11,7 @@ batch_size: 16
 eval_batch_size: 16
 
 # debug mode (disables wandb, model checkpointing, etc.)
-debug: false
+debug: true ### false
 
 # the port to use for FSDP
 fsdp_port: 12355
@@ -94,5 +94,5 @@ minimum_log_interval_secs: 1.0
 defaults:
 - _self_
 - model: pythia12 # basic model configuration
-- loss: dpo # which loss function, either sft or dpo (specify loss.beta if using dpo)
+- loss:  dpo ### which loss function, either sft or dpo (specify loss.beta if using dpo)
 
