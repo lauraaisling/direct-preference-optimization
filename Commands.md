@@ -21,24 +21,24 @@ $ python upload.py ~/hf/eleuther-pythia28-hh-sft_old lomahony/eleuther-pythia2.8
 ```
 
 ```console
-accelerate launch main.py --model hf --model_args pretrained=lomahony/eleuther-pythia2.8b-hh-sft --tasks lambada_openai,hellaswag,arc_easy,arc_challenge,wikitext,winogrande,piqa,boolq,openbookqa,sciq --num_fewshot 0 --batch_size 16 --output_path ~/direct-preference-optimization/model_eval_files/sft-pythia-2.8b-0shot > ~/direct-preference-optimization/model_eval_files/sft-pythia-2.8b-0shot-shelloutput.txt 
+~/lm-evaluation-harness$ accelerate launch main.py --model hf --model_args pretrained=lomahony/eleuther-pythia2.8b-hh-sft --tasks lambada_openai,hellaswag,arc_easy,arc_challenge,wikitext,winogrande,piqa,boolq,openbookqa,sciq --num_fewshot 0 --batch_size 16 --output_path ~/direct-preference-optimization/model_eval_files/sft-pythia-2.8b-0shot > ~/direct-preference-optimization/model_eval_files/sft-pythia-2.8b-0shot-shelloutput.txt 
 ```
 
-#ran in ultrafast:
+    #ran in ultrafast:
 ```console
-python main.py --model hf --model_args pretrained=lomahony/eleuther-pythia2.8b-hh-dpo,parallelize=True --tasks lambada_openai,hellaswag,arc_easy,arc_challenge,wikitext,winogrande,piqa,boolq,openbookqa,sciq --num_fewshot 5 --device cuda:1 --batch_size 8 --output_path /home/laura/direct-preference-optimization/model_eval_files/dpo-pythia-2.8b-5shot
+~/lm-evaluation-harness$ python main.py --model hf --model_args pretrained=lomahony/eleuther-pythia2.8b-hh-dpo,parallelize=True --tasks lambada_openai,hellaswag,arc_easy,arc_challenge,wikitext,winogrande,piqa,boolq,openbookqa,sciq --num_fewshot 5 --device cuda:1 --batch_size 8 --output_path /home/laura/direct-preference-optimization/model_eval_files/dpo-pythia-2.8b-5shot
 ```
 
 * Remember to use tmux: 
 ```console
 $ tmux 
 ```
-* Conda environment  direct-preference-optimization
+* Conda environment: direct-preference-optimization
 ```console
 $ conda activate direct-preference-optimization
 ```
 
-TODO: 
+## TODO: 
 * 12B DPO model 
     - [ ] Fix error
     - [ ] Train model
