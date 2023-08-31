@@ -1,59 +1,59 @@
 {
   "results": {
     "arc_challenge": {
-      "acc,none": 0.310580204778157,
-      "acc_stderr,none": 0.013522292098053069,
-      "acc_norm,none": 0.3464163822525597,
-      "acc_norm_stderr,none": 0.013905011180063242
+      "acc,none": 0.3779863481228669,
+      "acc_stderr,none": 0.014169664520303105,
+      "acc_norm,none": 0.41552901023890787,
+      "acc_norm_stderr,none": 0.014401366641216384
     },
     "arc_easy": {
-      "acc,none": 0.7011784511784511,
-      "acc_stderr,none": 0.009392656275408732,
-      "acc_norm,none": 0.6186868686868687,
-      "acc_norm_stderr,none": 0.00996654249717102
+      "acc,none": 0.7285353535353535,
+      "acc_stderr,none": 0.009125362970360623,
+      "acc_norm,none": 0.7361111111111112,
+      "acc_norm_stderr,none": 0.009043789220055137
     },
     "boolq": {
-      "acc,none": 0.6954128440366972,
-      "acc_stderr,none": 0.00804951448892039
+      "acc,none": 0.708868501529052,
+      "acc_stderr,none": 0.00794547704074596
     },
     "hellaswag": {
-      "acc,none": 0.5055765783708425,
-      "acc_stderr,none": 0.004989471055090951,
-      "acc_norm,none": 0.6667994423421629,
-      "acc_norm_stderr,none": 0.004703942346762236
+      "acc,none": 0.5118502290380402,
+      "acc_stderr,none": 0.004988379805261164,
+      "acc_norm,none": 0.6822346146186019,
+      "acc_norm_stderr,none": 0.004646561453031613
     },
     "lambada_openai": {
-      "perplexity,none": 3.5324751127269423,
-      "perplexity_stderr,none": 0.07759679763422017,
-      "acc,none": 0.7104599262565496,
-      "acc_stderr,none": 0.006318823234213228
+      "perplexity,none": 4.038061874931845,
+      "perplexity_stderr,none": 0.09319582903631948,
+      "acc,none": 0.6794100523966622,
+      "acc_stderr,none": 0.006502090459040093
     },
     "openbookqa": {
-      "acc,none": 0.276,
-      "acc_stderr,none": 0.02001121929807353,
-      "acc_norm,none": 0.382,
-      "acc_norm_stderr,none": 0.021750820591250827
+      "acc,none": 0.326,
+      "acc_stderr,none": 0.020984009562393567,
+      "acc_norm,none": 0.402,
+      "acc_norm_stderr,none": 0.021948929609938612
     },
     "piqa": {
-      "acc,none": 0.7633297062023939,
-      "acc_stderr,none": 0.009916841655042807,
-      "acc_norm,none": 0.764417845484222,
-      "acc_norm_stderr,none": 0.009901067586473916
+      "acc,none": 0.7725788900979326,
+      "acc_stderr,none": 0.009779850767847266,
+      "acc_norm,none": 0.779651795429815,
+      "acc_norm_stderr,none": 0.009670535456853169
     },
     "sciq": {
-      "acc,none": 0.906,
-      "acc_stderr,none": 0.009233052000787728,
-      "acc_norm,none": 0.844,
-      "acc_norm_stderr,none": 0.011480235006122356
+      "acc,none": 0.946,
+      "acc_stderr,none": 0.007150883521295439,
+      "acc_norm,none": 0.949,
+      "acc_norm_stderr,none": 0.0069604200625714065
     },
     "wikitext": {
-      "word_perplexity,none": 16.56112447245529,
-      "byte_perplexity,none": 1.588448103407034,
-      "bits_per_byte,none": 0.6676179561638627
+      "word_perplexity,none": 16.64885435761148,
+      "byte_perplexity,none": 1.5898322249263874,
+      "bits_per_byte,none": 0.6688745258631407
     },
     "winogrande": {
-      "acc,none": 0.6345698500394633,
-      "acc_stderr,none": 0.013533965097638798
+      "acc,none": 0.6361483820047356,
+      "acc_stderr,none": 0.013521488896883423
     }
   },
   "configs": {
@@ -73,7 +73,7 @@
       "description": "",
       "target_delimiter": " ",
       "fewshot_delimiter": "\n\n",
-      "num_fewshot": 0,
+      "num_fewshot": 5,
       "metric_list": [
         {
           "metric": "acc",
@@ -107,7 +107,7 @@
       "description": "",
       "target_delimiter": " ",
       "fewshot_delimiter": "\n\n",
-      "num_fewshot": 0,
+      "num_fewshot": 5,
       "metric_list": [
         {
           "metric": "acc",
@@ -143,7 +143,7 @@
       "description": "",
       "target_delimiter": " ",
       "fewshot_delimiter": "\n\n",
-      "num_fewshot": 0,
+      "num_fewshot": 5,
       "metric_list": [
         {
           "metric": "acc"
@@ -162,14 +162,14 @@
       "dataset_path": "hellaswag",
       "training_split": "train",
       "validation_split": "validation",
-      "process_docs": "<function process_docs at 0x7fa0005d55e0>",
+      "process_docs": "<function process_docs at 0x7ff8a702d700>",
       "doc_to_text": "{{query}}",
       "doc_to_target": "{{label}}",
       "doc_to_choice": "{{choices}}",
       "description": "",
       "target_delimiter": " ",
       "fewshot_delimiter": "\n\n",
-      "num_fewshot": 0,
+      "num_fewshot": 5,
       "metric_list": [
         {
           "metric": "acc",
@@ -199,7 +199,7 @@
       "description": "",
       "target_delimiter": " ",
       "fewshot_delimiter": "\n\n",
-      "num_fewshot": 0,
+      "num_fewshot": 5,
       "metric_list": [
         {
           "metric": "perplexity",
@@ -230,7 +230,7 @@
       "description": "",
       "target_delimiter": " ",
       "fewshot_delimiter": "\n\n",
-      "num_fewshot": 0,
+      "num_fewshot": 5,
       "metric_list": [
         {
           "metric": "acc",
@@ -259,7 +259,7 @@
       "description": "",
       "target_delimiter": " ",
       "fewshot_delimiter": "\n\n",
-      "num_fewshot": 0,
+      "num_fewshot": 5,
       "metric_list": [
         {
           "metric": "acc",
@@ -289,7 +289,7 @@
       "description": "",
       "target_delimiter": " ",
       "fewshot_delimiter": "\n\n",
-      "num_fewshot": 0,
+      "num_fewshot": 5,
       "metric_list": [
         {
           "metric": "acc",
@@ -315,11 +315,11 @@
       "validation_split": "validation",
       "test_split": "test",
       "doc_to_text": "",
-      "doc_to_target": "<function wikitext_detokenizer at 0x7f9fff5441f0>",
+      "doc_to_target": "<function wikitext_detokenizer at 0x7ff8a5f97310>",
       "description": "",
       "target_delimiter": " ",
       "fewshot_delimiter": "\n\n",
-      "num_fewshot": 0,
+      "num_fewshot": 5,
       "metric_list": [
         {
           "metric": "word_perplexity"
@@ -342,13 +342,13 @@
       "dataset_name": "winogrande_xl",
       "training_split": "train",
       "validation_split": "validation",
-      "doc_to_text": "<function doc_to_text at 0x7f9fff544430>",
-      "doc_to_target": "<function doc_to_target at 0x7f9fff544790>",
-      "doc_to_choice": "<function doc_to_choice at 0x7f9fff544af0>",
+      "doc_to_text": "<function doc_to_text at 0x7ff8a5f97550>",
+      "doc_to_target": "<function doc_to_target at 0x7ff8a5f978b0>",
+      "doc_to_choice": "<function doc_to_choice at 0x7ff8a5f97c10>",
       "description": "",
       "target_delimiter": " ",
       "fewshot_delimiter": "\n\n",
-      "num_fewshot": 0,
+      "num_fewshot": 5,
       "metric_list": [
         {
           "metric": "acc",
@@ -376,8 +376,8 @@
   },
   "config": {
     "model": "hf",
-    "model_args": "pretrained=lomahony/eleuther-pythia12b-hh-sft,parallelize=True",
-    "batch_size": "16",
+    "model_args": "pretrained=lomahony/eleuther-pythia12b-hh-dpo,parallelize=True",
+    "batch_size": "8",
     "batch_sizes": [],
     "device": null,
     "use_cache": null,

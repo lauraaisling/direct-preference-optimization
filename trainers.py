@@ -319,13 +319,24 @@ class BasicTrainer(object):
                         if self.config.loss.name == 'dpo':
                             wandb.log({"reference_samples": reference_text_table}, step=self.example_counter)
 
-                if self.example_counter > 0:
+                if self.example_counter > 0: 
                     if self.config.debug:
                         rank0_print('skipping save in debug mode')
                     else:
-                        output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
-                        rank0_print(f'creating checkpoint to write to {output_dir}...')
-                        self.save(output_dir, mean_eval_metrics)
+
+                        #########################################################################################
+                        ### Disabling saving model checkpoints as not enough memory
+                        # output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
+                        # rank0_print(f'creating checkpoint to write to {output_dir}...')
+                        # self.save(output_dir, mean_eval_metrics)
+                        ### Only save last model checkpoint as not enough memory
+                        if self.example_counter > 160_000: 
+                            output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
+                            rank0_print(f'creating checkpoint to write to {output_dir}...')
+                            self.save(output_dir, mean_eval_metrics)
+                        else: 
+                            rank0_print('testing skipping save')
+                        #########################################################################################
             #### END EVALUATION ####
 
             #### BEGIN TRAINING ####

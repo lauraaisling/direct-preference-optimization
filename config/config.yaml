@@ -2,7 +2,7 @@
 seed: 0
 
 # name for this experiment in the local run directory and on wandb
-exp_name: pythia12_hh_ga2_sft_policy_dtype_bfloat16 ###
+exp_name: pythia12_hh_ga2_dpo_policy_dtype_bfloat16 ###
 
 # the batch size for training; for FSDP, the batch size per GPU is batch_size / (grad_accumulation_steps * num_gpus)
 batch_size: 16
@@ -86,7 +86,7 @@ warmup_steps: 150
 activation_checkpointing: false
 
 # evaluate and save model every eval_every steps
-eval_every: 20_000
+eval_every: 200_000 ### 
 
 # prevent wandb from logging more than once per minimum_log_interval_secs
 minimum_log_interval_secs: 1.0
@@ -94,5 +94,5 @@ minimum_log_interval_secs: 1.0
 defaults:
 - _self_
 - model: pythia12 # basic model configuration
-- loss:  sft ### which loss function, either sft or dpo (specify loss.beta if using dpo)
+- loss:  dpo ### which loss function, either sft or dpo (specify loss.beta if using dpo)
 
