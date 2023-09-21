@@ -326,16 +326,16 @@ class BasicTrainer(object):
 
                         #########################################################################################
                         ### Disabling saving model checkpoints as not enough memory
-                        # output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
-                        # rank0_print(f'creating checkpoint to write to {output_dir}...')
-                        # self.save(output_dir, mean_eval_metrics)
-                        ### Only save last model checkpoint as not enough memory
-                        if self.example_counter > 160_000: 
-                            output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
-                            rank0_print(f'creating checkpoint to write to {output_dir}...')
-                            self.save(output_dir, mean_eval_metrics)
-                        else: 
-                            rank0_print('testing skipping save')
+                        output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
+                        rank0_print(f'creating checkpoint to write to {output_dir}...')
+                        self.save(output_dir, mean_eval_metrics)
+                        ## Only save last model checkpoint as not enough memory
+                        # if self.example_counter > 160_000: 
+                        #     output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
+                        #     rank0_print(f'creating checkpoint to write to {output_dir}...')
+                        #     self.save(output_dir, mean_eval_metrics)
+                        # else: 
+                        #     rank0_print('testing skipping save')
                         #########################################################################################
             #### END EVALUATION ####
 
