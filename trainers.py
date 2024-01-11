@@ -193,6 +193,7 @@ class BasicTrainer(object):
             with ctx():
                 reference_output = self.reference_model.generate(
                     batch['prompt_input_ids'], attention_mask=batch['prompt_attention_mask'], max_length=self.config.max_length, do_sample=True, pad_token_id=self.tokenizer.pad_token_id)
+                print("reference_output: ", reference_output) ################
 
         policy_output = pad_to_length(policy_output, self.config.max_length, self.tokenizer.pad_token_id)
         policy_output = all_gather_if_needed(policy_output, self.rank, self.world_size)
@@ -347,9 +348,20 @@ class BasicTrainer(object):
                     if self.config.debug:
                         rank0_print('skipping save in debug mode')
                     else:
+                        #########################################################################################
+                        ### Disabling saving model checkpoints as not enough memory
                         output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
                         rank0_print(f'creating checkpoint to write to {output_dir}...')
                         self.save(output_dir, mean_eval_metrics)
+                        ### Only save last model checkpoint as not enough memory
+                        # if self.example_counter > 160_000: 
+                        #     output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
+                        #     rank0_print(f'creating checkpoint to write to {output_dir}...')
+                        #     self.save(output_dir, mean_eval_metrics)
+                        # else: 
+                        #     rank0_print('testing skipping save')
+                        #########################################################################################
+                            
             #### END EVALUATION ####
 
             #### BEGIN TRAINING ####

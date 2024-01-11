@@ -80,14 +80,14 @@ def main(config: DictConfig):
     print('building policy')
     model_kwargs = {'device_map': 'balanced'} if config.trainer == 'BasicTrainer' else {}
     policy_dtype = getattr(torch, config.model.policy_dtype)
-    policy = transformers.AutoModelForCausalLM.from_pretrained(
+    policy = transformers.AutoModelForCausalLM.from_pretrained( # AutoModelForCausalLM # GPTNeoXForCausalLM
         config.model.name_or_path, cache_dir=get_local_dir(config.local_dirs), low_cpu_mem_usage=True, torch_dtype=policy_dtype, **model_kwargs)
     disable_dropout(policy)
 
     if config.loss.name in {'dpo', 'ipo'}:
         print('building reference model')
         reference_model_dtype = getattr(torch, config.model.reference_dtype)
-        reference_model = transformers.AutoModelForCausalLM.from_pretrained(
+        reference_model = transformers.AutoModelForCausalLM.from_pretrained( # AutoModelForCausalLM # GPTNeoXForCausalLM
             config.model.name_or_path, cache_dir=get_local_dir(config.local_dirs), low_cpu_mem_usage=True, torch_dtype=reference_model_dtype, **model_kwargs)
         disable_dropout(reference_model)
     else:
@@ -97,9 +97,9 @@ def main(config: DictConfig):
         state_dict = torch.load(config.model.archive, map_location='cpu')
         step, metrics = state_dict['step_idx'], state_dict['metrics']
         print(f'loading pre-trained weights at step {step} from {config.model.archive} with metrics {json.dumps(metrics, indent=2)}')
-        policy.load_state_dict(state_dict['state'])
+        policy.load_state_dict(state_dict['state']) # )#
         if config.loss.name in {'dpo', 'ipo'}:
-            reference_model.load_state_dict(state_dict['state'])
+            reference_model.load_state_dict(state_dict['state']) # )#
         print('loaded pre-trained weights')
     
     if 'FSDP' in config.trainer:

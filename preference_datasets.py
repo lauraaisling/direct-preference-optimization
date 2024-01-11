@@ -160,12 +160,46 @@ def get_hh(split: str, silent: bool = False, cache_dir: str = None) -> Dict[str,
     return data
 
 
+##TODO
+def get_hh_static(split: str, silent: bool = False, cache_dir: str = None) -> Dict[str, Dict[str, Union[List[Tuple[int, int]], List[str], str]]]:
+    """Load the static Anthropic Helpful-Harmless dataset from Huggingface and convert it to the necessary format.
+
+       For this dataset, the sft_target is just the chosen response.
+    """
+    print(f'Loading HH static dataset ({split} split) from Huggingface...')
+    # https://huggingface.co/datasets/Dahoas/static-hh
+    dataset = datasets.load_dataset("Dahoas/static-hh", split=split, cache_dir=cache_dir)
+    print('done')
+
+    def split_prompt_and_responses(ex):
+        # prompt = extract_anthropic_prompt(ex['chosen'])
+        # chosen_response = ex['chosen'][len(prompt):]
+        # rejected_response = ex['rejected'][len(prompt):]
+        prompt = ex['prompt']
+        chosen_response = ex['chosen']
+        rejected_response = ex['rejected']
+        return prompt, chosen_response, rejected_response
+
+    data = defaultdict(lambda: defaultdict(list))
+    for row in tqdm.tqdm(dataset, desc='Processing HH static', disable=silent):
+        prompt, chosen, rejected = split_prompt_and_responses(row)
+        responses = [chosen, rejected]
+        n_responses = len(data[prompt]['responses'])
+        data[prompt]['pairs'].append((n_responses, n_responses + 1))
+        data[prompt]['responses'].extend(responses)
+        data[prompt]['sft_target'] = chosen
+
+    return data
+
+
 def get_dataset(name: str, split: str, silent: bool = False, cache_dir: str = None):
     """Load the given dataset by name. Supported by default are 'shp', 'hh', and 'se'."""
     if name == 'shp':
         data = get_shp(split, silent=silent, cache_dir=cache_dir)
     elif name == 'hh':
         data = get_hh(split, silent=silent, cache_dir=cache_dir)
+    elif name == 'hh_static':
+        data = get_hh_static(split, silent=silent, cache_dir=cache_dir)
     elif name == 'se':
         data = get_se(split, silent=silent, cache_dir=cache_dir)
     else:
@@ -316,7 +350,7 @@ def get_batch_iterator(names: List[str],
         permutation_seeds = iter(np.random.randint(0, 2**32, size=1000000))
         flat_data = []
         for name in names:
-            truncation_mode = 'keep_end' if name == 'hh' else 'keep_start'
+            truncation_mode = 'keep_end' if (name == 'hh' or name == 'hh_static') else 'keep_start' ################################## TODO
             for prompt, data in get_dataset(name, split, silent=silent, cache_dir=cache_dir).items():
                 flat_data.append((prompt, data['responses'], data['pairs'], data['sft_target'], truncation_mode))
 
