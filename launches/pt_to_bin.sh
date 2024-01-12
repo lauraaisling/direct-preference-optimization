@@ -27,26 +27,64 @@ export HYDRA_FULL_ERROR=1
 # source /admin/home-laura/venvs/venv-direct-preference-optimization/bin/activate
 source /admin/home-laura/venvs/venv-direct-preference-optimization310/bin/activate
 
-# python new_scripts/hf_download.py
+##INFO convert trained models from policy.pt to pytorch_model.bin
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-11968 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-23936 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-35904 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-47872 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-59840 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-71808 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-83776 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-95744 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/LATEST 
+
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-11968 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-23936 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-35904 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-47872 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-59840 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-71808 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-83776 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-95744 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/LATEST 
+
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-11968 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-23936 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-35904 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-47872 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-59840 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-71808 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-83776 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-95744 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/LATEST 
 
 # check dataset processed correct, adjust eval_every 
-# python -u new_scripts/py_to_bin.py outputs/pythia70m_dpo_seed0_2024-01-11_21-37-51_704916/step-11968/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia70m_dpo_seed0_2024-01-11_21-37-51_704916/step-23936/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia70m_dpo_seed0_2024-01-11_21-37-51_704916/step-35904/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia70m_dpo_seed0_2024-01-11_21-37-51_704916/step-47872/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia70m_dpo_seed0_2024-01-11_21-37-51_704916/step-59840/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia70m_dpo_seed0_2024-01-11_21-37-51_704916/step-71808/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia70m_dpo_seed0_2024-01-11_21-37-51_704916/step-83776/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia70m_dpo_seed0_2024-01-11_21-37-51_704916/step-95744/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia70m_dpo_seed0_2024-01-11_21-37-51_704916/LATEST/policy.pt
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-11968 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-23936 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-35904 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-47872 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-59840 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-71808 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-83776 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-95744 
+# python -u new_scripts/pt_to_bin.py --directory outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/LATEST 
 
-# check dataset processed correct, adjust eval_every 
-# python -u new_scripts/py_to_bin.py outputs/pythia160m_dpo_seed0_2024-01-11_21-37-51_704916/step-11968/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia160m_dpo_seed0_2024-01-11_21-37-51_704916/step-23936/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia160m_dpo_seed0_2024-01-11_21-37-51_704916/step-35904/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia160m_dpo_seed0_2024-01-11_21-37-51_704916/step-47872/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia160m_dpo_seed0_2024-01-11_21-37-51_704916/step-59840/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia160m_dpo_seed0_2024-01-11_21-37-51_704916/step-71808/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia160m_dpo_seed0_2024-01-11_21-37-51_704916/step-83776/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia160m_dpo_seed0_2024-01-11_21-37-51_704916/step-95744/policy.pt
-# python -u new_scripts/py_to_bin.py outputs/pythia160m_dpo_seed0_2024-01-11_21-37-51_704916/LATEST/policy.pt
+# python new_scripts/pt_to_bin.py --directory outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/LATEST 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-12000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-24000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-36000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-48000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-60000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-72000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-84000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-96000 
+
+# python new_scripts/pt_to_bin.py --directory outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/LATEST 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-12000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-24000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-36000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-48000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-60000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-72000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-84000 
+# python new_scripts/pt_to_bin.py --directory outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-96000 

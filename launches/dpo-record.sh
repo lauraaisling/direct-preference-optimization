@@ -1,5 +1,5 @@
 #!/bin/bash
-# sbatch launches/dpo-launches.sh
+# sbatch launches/dpo-record.sh
 #Resource Request 
 #SBATCH --account=eleuther
 #SBATCH --job-name=pythia
@@ -29,11 +29,16 @@ source /admin/home-laura/venvs/venv-direct-preference-optimization310/bin/activa
 
 # python new_scripts/hf_download.py
 
-# check dataset processed correct, adjust eval_every 
-# python -u train.py loss.beta=0.1 model=pythia70m-sft seed=0 exp_name=pythia70m_dpo_seed0 batch_size=64 gradient_accumulation_steps=1 # model.fsdp_policy_mp=bfloat16 # model.archive=.cache/laura/models--lomahony--pythia-70m-helpful-sft/snapshots/951e3e7390d510470d7b5c4d4d941a940ab5aa04/policy.pt
-python -u train.py loss.beta=0.1 model=pythia160m-sft seed=0 exp_name=pythia160m_dpo_seed0 batch_size=64 gradient_accumulation_steps=1 # model.fsdp_policy_mp=bfloat16
+# want batch size constant: "batch_size" 32 * gradient_accumulation_steps 2 * num_gpus 8
+##INFO check dataset processed correct, adjust eval_every 
+##INFO upgraded to transformers==4.36.2
 # python -u train.py loss.beta=0.1 model=pythia410m-sft seed=0 exp_name=pythia410m_dpo_seed0 batch_size=64 gradient_accumulation_steps=1
 # python -u train.py loss.beta=0.1 model=pythia1-sft seed=0 exp_name=pythia1b_dpo_seed0 batch_size=64 gradient_accumulation_steps=1
-# python -u train.py loss.beta=0.1 model=pythia14-sft seed=0 exp_name=pythia1.4b_dpo_seed0 batch_size=64 gradient_accumulation_steps=1 # bs 4, ga 2
-# python -u train.py loss.beta=0.1 model=pythia28-sft seed=0 exp_name=pythia2.8b_dpo_seed0 batch_size=32 gradient_accumulation_steps=2 # bs 2, ga 4
+# python -u train.py loss.beta=0.1 model=pythia14-sft seed=0 exp_name=pythia1.4b_dpo_seed0 batch_size=32 gradient_accumulation_steps=2 
+# python -u train.py loss.beta=0.1 model=pythia28-sft seed=0 exp_name=pythia2.8b_dpo_seed0 batch_size=32 gradient_accumulation_steps=2 # 2 bs_per_gpu since "batch_size" 32 / (gradient_accumulation_steps 2 * num_gpus 8)
 
+##NOTE see error {'rewards_train/chosen': 'nan', 'rewards_train/rejected': 'nan'
+##INFO had to transformers==4.29.2 due to nan rewards for 70m, 160m (4.29.2)
+##NOTE see error Some weights of GPTNeoXForCausalLM were not initialized
+# python -u train.py loss.beta=0.1 model=pythia70m-sft seed=0 exp_name=pythia70m_dpo_seed0 batch_size=64 gradient_accumulation_steps=1
+# python -u train.py loss.beta=0.1 model=pythia160m-sft seed=0 exp_name=pythia160m_dpo_seed0 batch_size=64 gradient_accumulation_steps=1

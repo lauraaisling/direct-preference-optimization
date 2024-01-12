@@ -1,18 +1,16 @@
 ## Run Training: 
-* create and activate python3.10 venv, install requirement.txt
+* create and activate python3.10 venv, install requirement.txt. See record of runs and packages in launchs. May have to update transformers, numpy... 
 * Log in wandb 
-* Alter config
-* [Done with TRLx] train sft model: 
-* train dpo model: 
-```console
-$ python -u train.py loss.beta=0.1 model=pythia70m-sft seed=0 exp_name=pythia1.4b_dpo_seed0 batch_size=8 gradient_accumulation_steps=1
-```
-* convert to pytorch_model.bin
+* Alter config/sh files
+* may need to download models from huggingface with script python new_scripts/hf_download.py
+* Either SFT
+[Done with TRLx] train sft model: see launches/dpo-record.sh
+or DPO
+[Done with TRLx] train dpo model: see launches/sft-record.sh
+* convert to pytorch_model.bin: see launches/pt_to_bin.sh
 * Upload model to HF
-Log in. 
-```console
+First log in. Then see launches/upload_hf.sh
 
-$ python upload.py ~/hf/eleuther-pythia28-hh-sft_old lomahony/eleuther-pythia2.8b-hh-sft main
 ```
 * evaluate with lm-evaluation-harness
 ```console
@@ -24,18 +22,13 @@ $ python upload.py ~/hf/eleuther-pythia28-hh-sft_old lomahony/eleuther-pythia2.8
 ```
 
 ## TODO: 
-* Run DPO code 
-    - [X] Set up
-    - [ ] Run 70m
-    - [ ] Run 160m
-    - [ ] Run 410m
-    - [ ] Run 1b
-    - [ ] Run 1.4b
-    - [ ] Run 2.8b
+* Train models
+    - [ ] IPO
+    - [ ] cDPO
 * Convert model format 
-    - [ ] All
+    - [ ] 
 * Upload to HuggingFace 
-    - [ ] All
+    - [ ] 
 * lm-evaluation-harness:
     - [ ] Evaluate all
 

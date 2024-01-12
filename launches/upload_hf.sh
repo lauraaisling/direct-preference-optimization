@@ -1,91 +1,91 @@
 #!/bin/bash
-# bash upload_hf.sh
-source ~/anaconda3/bin/activate direct-preference-optimization310
+# sbatch launches/upload_hf.sh
+#Resource Request 
+#SBATCH --account=eleuther
+#SBATCH --job-name=pythia
+#SBATCH --output=dpo-xxx-%x_%j.out   ## filename of the output; the %j is equivalent to jobID; default is slurm-[jobID].out 
+#SBATCH --partition=a40x ## the partitions to run in (comma seperated) 
 
-# python pt_to_bin.py --directory pythia70m_sft_seed1_2023-09-21_15-49-05_775325/LATEST
-# python pt_to_bin.py --directory pythia70m_sft_seed2_2023-09-21_16-06-06_096366/LATEST
-# python pt_to_bin.py --directory pythia70m_sft_seed3_2023-09-21_16-23-00_311915/LATEST
-# python pt_to_bin.py --directory pythia70m_sft_seed4_2023-09-21_16-39-52_512958/LATEST
-# python pt_to_bin.py --directory pythia70m_sft_seed5_2023-09-21_16-57-05_222483/LATEST
+#SBATCH --gpus=1 # number of gpus per task 
+#SBATCH --cpus-per-gpu=12 
+#SBATCH --nodes=1
 
-# python pt_to_bin.py --directory pythia160m_sft_seed1_2023-09-21_17-13-52_063227/LATEST
-# python pt_to_bin.py --directory pythia160m_sft_seed2_2023-09-21_17-47-40_515773/LATEST
-# python pt_to_bin.py --directory pythia160m_sft_seed3_2023-09-21_18-21-10_261566/LATEST
-# python pt_to_bin.py --directory pythia160m_sft_seed4_2023-09-21_18-55-04_899627/LATEST
-# python pt_to_bin.py --directory pythia160m_sft_seed5_2023-09-21_19-31-25_915218/LATEST
+#SBATCH --mail-type=ALL
 
-# python pt_to_bin.py --directory pythia410m_sft_seed1_2023-09-14_03-35-05_280857/LATEST
-# python pt_to_bin.py --directory pythia410m_sft_seed2_2023-09-14_04-56-05_109863/LATEST
-# python pt_to_bin.py --directory pythia410m_sft_seed3_2023-09-14_06-16-21_190220/LATEST
-# python pt_to_bin.py --directory pythia410m_sft_seed4_2023-09-14_07-36-33_204121/LATEST
-# python pt_to_bin.py --directory pythia410m_sft_seed5_2023-09-14_08-55-43_277568/LATEST
+##SBATCH --error=%x_%jerror.out    # Set this dir where you want slurm outs to go
+##SBATCH --ntasks=1  ## number of tasks (analyses) to run 
+##SBATCH --gpus-per-task=1 # number of gpus per task 
+##SBATCH --ntasks-per-node=8
 
-# python pt_to_bin.py --directory pythia1b_sft_seed1_2023-09-14_14-57-12_773041/LATEST
-# python pt_to_bin.py --directory pythia1b_sft_seed2_2023-09-14_17-43-04_569575/LATEST
-# python pt_to_bin.py --directory pythia1b_sft_seed3_2023-09-14_20-25-01_789224/LATEST
-# python pt_to_bin.py --directory pythia1b_sft_seed4_2023-09-14_23-13-31_514360/LATEST
-# python pt_to_bin.py --directory pythia1b_sft_seed5_2023-09-15_01-54-54_850793/LATEST
+# module load cuda/11.7
+module load cuda/12.1
 
-# python pt_to_bin.py --directory pythia14b_sft_seed1_2023-09-15_04-36-25_865609/LATEST
-# python pt_to_bin.py --directory pythia14b_sft_seed2_2023-09-15_08-28-44_048411/LATEST
-# python pt_to_bin.py --directory pythia14b_sft_seed3_2023-09-15_12-24-04_063969/LATEST
-# python pt_to_bin.py --directory pythia14b_sft_seed4_2023-09-15_16-13-12_999907/LATEST
-# python pt_to_bin.py --directory pythia14b_sft_seed5_2023-09-15_20-14-32_715782/LATEST
+export HYDRA_FULL_ERROR=1
+# export HF_HOME='/admin/home-laura/.cache/huggingface/hub'
+# export HF_DATASETS_CACHE='/admin/home-laura/.cache/huggingface/datasets'
 
-# python pt_to_bin.py --directory pythia28b_sft_seed1_2023-09-16_00-07-38_239957/LATEST
-# python pt_to_bin.py --directory pythia28b_sft_seed2_2023-09-16_07-34-14_636248/LATEST
-# python pt_to_bin.py --directory pythia28b_sft_seed3_2023-09-16_15-11-30_340394/LATEST
-# python pt_to_bin.py --directory pythia28b_sft_seed4_2023-09-16_23-01-15_562635/LATEST
-# python pt_to_bin.py --directory pythia28b_sft_seed5_2023-09-17_06-40-30_292072/LATEST
+# source /admin/home-laura/venvs/venv-direct-preference-optimization/bin/activate
+source /admin/home-laura/venvs/venv-direct-preference-optimization310/bin/activate
 
-# python pt_to_bin.py --directory pythia69b_sft_seed1_2023-09-17_14-11-51_187139/LATEST
-# python pt_to_bin.py --directory pythia69b_sft_seed2_2023-09-18_08-09-18_438237/LATEST
-# python pt_to_bin.py --directory pythia69b_sft_seed3_2023-09-19_01-52-05_568776/LATEST
-# python pt_to_bin.py --directory pythia69b_sft_seed4_2023-09-19_19-42-33_274711/LATEST
-# python pt_to_bin.py --directory pythia69b_sft_seed5_2023-09-20_13-41-00_221663/LATEST
+##INFO Upload DPO models to the hub
+# python new_scripts/upload.py outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/LATEST lomahony/pythia-70m-helpful-dpo main
+# python new_scripts/upload.py outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-11968 lomahony/pythia-70m-helpful-dpo 11968
+# python new_scripts/upload.py outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-23936 lomahony/pythia-70m-helpful-dpo 23936
+# python new_scripts/upload.py outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-35904 lomahony/pythia-70m-helpful-dpo 35904
+# python new_scripts/upload.py outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-47872 lomahony/pythia-70m-helpful-dpo 47872
+# python new_scripts/upload.py outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-59840 lomahony/pythia-70m-helpful-dpo 59840
+# python new_scripts/upload.py outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-71808 lomahony/pythia-70m-helpful-dpo 71808
+# python new_scripts/upload.py outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-83776 lomahony/pythia-70m-helpful-dpo 83776
+# python new_scripts/upload.py outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-95744 lomahony/pythia-70m-helpful-dpo 95744
 
-# python pt_to_bin.py --directory /LATEST
+# python new_scripts/upload.py outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/LATEST lomahony/pythia-160m-helpful-dpo main
+# python new_scripts/upload.py outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-11968 lomahony/pythia-160m-helpful-dpo 11968
+# python new_scripts/upload.py outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-23936 lomahony/pythia-160m-helpful-dpo 23936
+# python new_scripts/upload.py outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-35904 lomahony/pythia-160m-helpful-dpo 35904
+# python new_scripts/upload.py outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-47872 lomahony/pythia-160m-helpful-dpo 47872
+# python new_scripts/upload.py outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-59840 lomahony/pythia-160m-helpful-dpo 59840
+# python new_scripts/upload.py outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-71808 lomahony/pythia-160m-helpful-dpo 71808
+# python new_scripts/upload.py outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-83776 lomahony/pythia-160m-helpful-dpo 83776
+# python new_scripts/upload.py outputs/pythia160m_dpo_seed0_2024-01-12_14-47-57_115351/step-95744 lomahony/pythia-160m-helpful-dpo 95744
 
-# python upload.py .cache/laura/pythia70m_sft_seed1_2023-09-21_15-49-05_775325/LATEST lomahony/pythia-70m-hh-sft-seed1 main
-# python upload.py .cache/laura/pythia70m_sft_seed2_2023-09-21_16-06-06_096366/LATEST lomahony/pythia-70m-hh-sft-seed2 main
-# python upload.py .cache/laura/pythia70m_sft_seed3_2023-09-21_16-23-00_311915/LATEST lomahony/pythia-70m-hh-sft-seed3 main
-# python upload.py .cache/laura/pythia70m_sft_seed4_2023-09-21_16-39-52_512958/LATEST lomahony/pythia-70m-hh-sft-seed4 main
-# python upload.py .cache/laura/pythia70m_sft_seed5_2023-09-21_16-57-05_222483/LATEST lomahony/pythia-70m-hh-sft-seed5 main
+# python new_scripts/upload.py outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/LATEST lomahony/pythia-410m-helpful-dpo main
+# python new_scripts/upload.py outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-11968 lomahony/pythia-410m-helpful-dpo 11968
+# python new_scripts/upload.py outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-23936 lomahony/pythia-410m-helpful-dpo 23936
+# python new_scripts/upload.py outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-35904 lomahony/pythia-410m-helpful-dpo 35904
+# python new_scripts/upload.py outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-47872 lomahony/pythia-410m-helpful-dpo 47872
+# python new_scripts/upload.py outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-59840 lomahony/pythia-410m-helpful-dpo 59840
+# python new_scripts/upload.py outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-71808 lomahony/pythia-410m-helpful-dpo 71808
+# python new_scripts/upload.py outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-83776 lomahony/pythia-410m-helpful-dpo 83776
+# python new_scripts/upload.py outputs/pythia410m_dpo_seed0_2024-01-11_22-08-55_480950/step-95744 lomahony/pythia-410m-helpful-dpo 95744
 
-# python upload.py .cache/laura/pythia160m_sft_seed1_2023-09-21_17-13-52_063227/LATEST lomahony/pythia-160m-hh-sft-seed1 main
-# python upload.py .cache/laura/pythia160m_sft_seed2_2023-09-21_17-47-40_515773/LATEST lomahony/pythia-160m-hh-sft-seed2 main
-# python upload.py .cache/laura/pythia160m_sft_seed3_2023-09-21_18-21-10_261566/LATEST lomahony/pythia-160m-hh-sft-seed3 main
-# python upload.py .cache/laura/pythia160m_sft_seed4_2023-09-21_18-55-04_899627/LATEST lomahony/pythia-160m-hh-sft-seed4 main
-# python upload.py .cache/laura/pythia160m_sft_seed5_2023-09-21_19-31-25_915218/LATEST lomahony/pythia-160m-hh-sft-seed5 main
+# python new_scripts/upload.py outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/LATEST lomahony/pythia-1b-helpful-dpo main
+# python new_scripts/upload.py outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-11968 lomahony/pythia-1b-helpful-dpo 11968
+# python new_scripts/upload.py outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-23936 lomahony/pythia-1b-helpful-dpo 23936
+# python new_scripts/upload.py outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-35904 lomahony/pythia-1b-helpful-dpo 35904
+# python new_scripts/upload.py outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-47872 lomahony/pythia-1b-helpful-dpo 47872
+# python new_scripts/upload.py outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-59840 lomahony/pythia-1b-helpful-dpo 59840
+# python new_scripts/upload.py outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-71808 lomahony/pythia-1b-helpful-dpo 71808
+# python new_scripts/upload.py outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-83776 lomahony/pythia-1b-helpful-dpo 83776
+# python new_scripts/upload.py outputs/pythia1b_dpo_seed0_2024-01-12_00-15-24_949895/step-95744 lomahony/pythia-1b-helpful-dpo 95744
 
-# python upload.py .cache/laura/pythia410m_sft_seed1_2023-09-14_03-35-05_280857/LATEST lomahony/pythia-410m-hh-sft-seed1 main
-# python upload.py .cache/laura/pythia410m_sft_seed2_2023-09-14_04-56-05_109863/LATEST lomahony/pythia-410m-hh-sft-seed2 main
-# python upload.py .cache/laura/pythia410m_sft_seed3_2023-09-14_06-16-21_190220/LATEST lomahony/pythia-410m-hh-sft-seed3 main
-# python upload.py .cache/laura/pythia410m_sft_seed4_2023-09-14_07-36-33_204121/LATEST lomahony/pythia-410m-hh-sft-seed4 main
-# python upload.py .cache/laura/pythia410m_sft_seed5_2023-09-14_08-55-43_277568/LATEST lomahony/pythia-410m-hh-sft-seed5 main
+# python new_scripts/upload.py outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/LATEST lomahony/pythia-1.4b-helpful-dpo main
+# python new_scripts/upload.py outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-12000 lomahony/pythia-1.4b-helpful-dpo 12000
+# python new_scripts/upload.py outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-24000 lomahony/pythia-1.4b-helpful-dpo 24000
+# python new_scripts/upload.py outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-36000 lomahony/pythia-1.4b-helpful-dpo 36000
+# python new_scripts/upload.py outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-48000 lomahony/pythia-1.4b-helpful-dpo 48000
+# python new_scripts/upload.py outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-60000 lomahony/pythia-1.4b-helpful-dpo 60000
+# python new_scripts/upload.py outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-72000 lomahony/pythia-1.4b-helpful-dpo 72000
+# python new_scripts/upload.py outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-84000 lomahony/pythia-1.4b-helpful-dpo 84000
+# python new_scripts/upload.py outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-96000 lomahony/pythia-1.4b-helpful-dpo 96000
 
-# python upload.py .cache/laura/pythia1b_sft_seed1_2023-09-14_14-57-12_773041/LATEST lomahony/pythia-1b-hh-sft-seed1 main
-# python upload.py .cache/laura/pythia1b_sft_seed2_2023-09-14_17-43-04_569575/LATEST lomahony/pythia-1b-hh-sft-seed2 main
-# python upload.py .cache/laura/pythia1b_sft_seed3_2023-09-14_20-25-01_789224/LATEST lomahony/pythia-1b-hh-sft-seed3 main
-# python upload.py .cache/laura/pythia1b_sft_seed4_2023-09-14_23-13-31_514360/LATEST lomahony/pythia-1b-hh-sft-seed4 main
-# python upload.py .cache/laura/pythia1b_sft_seed5_2023-09-15_01-54-54_850793/LATEST lomahony/pythia-1b-hh-sft-seed5 main
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/LATEST lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo main
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-12000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 12000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-24000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 24000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-36000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 36000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-48000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 48000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-60000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 60000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-72000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 72000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-84000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 84000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-96000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 96000
 
-# python upload.py .cache/laura/pythia14b_sft_seed1_2023-09-15_04-36-25_865609/LATEST lomahony/pythia-1.4b-hh-sft-seed1 main
-# python upload.py .cache/laura/pythia14b_sft_seed2_2023-09-15_08-28-44_048411/LATEST lomahony/pythia-1.4b-hh-sft-seed2 main
-# python upload.py .cache/laura/pythia14b_sft_seed3_2023-09-15_12-24-04_063969/LATEST lomahony/pythia-1.4b-hh-sft-seed3 main
-# python upload.py .cache/laura/pythia14b_sft_seed4_2023-09-15_16-13-12_999907/LATEST lomahony/pythia-1.4b-hh-sft-seed4 main
-# python upload.py .cache/laura/pythia14b_sft_seed5_2023-09-15_20-14-32_715782/LATEST lomahony/pythia-1.4b-hh-sft-seed5 main
 
-# python upload.py .cache/laura/pythia28b_sft_seed1_2023-09-16_00-07-38_239957/LATEST lomahony/pythia-2.8b-hh-sft-seed1 main
-# python upload.py .cache/laura/pythia28b_sft_seed2_2023-09-16_07-34-14_636248/LATEST lomahony/pythia-2.8b-hh-sft-seed2 main
-# python upload.py .cache/laura/pythia28b_sft_seed3_2023-09-16_15-11-30_340394/LATEST lomahony/pythia-2.8b-hh-sft-seed3 main
-# python upload.py .cache/laura/pythia28b_sft_seed4_2023-09-16_23-01-15_562635/LATEST lomahony/pythia-2.8b-hh-sft-seed4 main
-# python upload.py .cache/laura/pythia28b_sft_seed5_2023-09-17_06-40-30_292072/LATEST lomahony/pythia-2.8b-hh-sft-seed5 main
-
-# python upload.py .cache/laura/pythia69b_sft_seed1_2023-09-17_14-11-51_187139/LATEST lomahony/pythia-6.9b-hh-sft-seed1 main
-# python upload.py .cache/laura/pythia69b_sft_seed2_2023-09-18_08-09-18_438237/LATEST lomahony/pythia-6.9b-hh-sft-seed2 main
-# python upload.py .cache/laura/pythia69b_sft_seed3_2023-09-19_01-52-05_568776/LATEST lomahony/pythia-6.9b-hh-sft-seed3 main
-# python upload.py .cache/laura/pythia69b_sft_seed4_2023-09-19_19-42-33_274711/LATEST lomahony/pythia-6.9b-hh-sft-seed4 main
-# python upload.py .cache/laura/pythia69b_sft_seed5_2023-09-20_13-41-00_221663/LATEST lomahony/pythia-6.9b-hh-sft-seed5 main
-
-# python upload.py .cache/laura//LATEST lomahony/pythia-XXX-hh-sft-seedX main
