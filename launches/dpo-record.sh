@@ -35,7 +35,7 @@ source /admin/home-laura/venvs/venv-direct-preference-optimization310/bin/activa
 # python -u train.py loss.beta=0.1 model=pythia410m-sft seed=0 exp_name=pythia410m_dpo_seed0 batch_size=64 gradient_accumulation_steps=1
 # python -u train.py loss.beta=0.1 model=pythia1-sft seed=0 exp_name=pythia1b_dpo_seed0 batch_size=64 gradient_accumulation_steps=1
 # python -u train.py loss.beta=0.1 model=pythia14-sft seed=0 exp_name=pythia1.4b_dpo_seed0 batch_size=32 gradient_accumulation_steps=2 
-# python -u train.py loss.beta=0.1 model=pythia28-sft seed=0 exp_name=pythia2.8b_dpo_seed0 batch_size=32 gradient_accumulation_steps=2 # 2 bs_per_gpu since "batch_size" 32 / (gradient_accumulation_steps 2 * num_gpus 8)
+python -u train.py loss.beta=0.1 model=pythia28-sft seed=0 exp_name=pythia2.8b_dpo_seed0 batch_size=32 gradient_accumulation_steps=2 # 2 bs_per_gpu since "batch_size" 32 / (gradient_accumulation_steps 2 * num_gpus 8)
 
 ##NOTE see error {'rewards_train/chosen': 'nan', 'rewards_train/rejected': 'nan'
 ##INFO had to transformers==4.29.2 due to nan rewards for 70m, 160m (4.29.2)
