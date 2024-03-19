@@ -1,4 +1,4 @@
-name_or_path: lomahony/pythia-2.8b-helpful-sft
+name_or_path: lomahony/pythia-2.8b-helpful-sft-3epochs
 tokenizer_name_or_path: null
 archive: null
 block_name: GPTNeoXLayer

@@ -2,8 +2,8 @@
 # sbatch launches/upload_hf.sh
 #Resource Request 
 #SBATCH --account=eleuther
-#SBATCH --job-name=pythia
-#SBATCH --output=dpo-xxx-%x_%j.out   ## filename of the output; the %j is equivalent to jobID; default is slurm-[jobID].out 
+#SBATCH --job-name=upload-dpo
+#SBATCH --output=slurm_%x_X_%j.out   ## filename of the output; the %j is equivalent to jobID; default is slurm-[jobID].out 
 #SBATCH --partition=a40x ## the partitions to run in (comma seperated) 
 
 #SBATCH --gpus=1 # number of gpus per task 
@@ -26,6 +26,7 @@ export HYDRA_FULL_ERROR=1
 
 # source /admin/home-laura/venvs/venv-direct-preference-optimization/bin/activate
 source /admin/home-laura/venvs/venv-direct-preference-optimization310/bin/activate
+
 
 ##INFO Upload DPO models to the hub
 # python new_scripts/upload.py outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/LATEST lomahony/pythia-70m-helpful-dpo main
@@ -78,14 +79,14 @@ source /admin/home-laura/venvs/venv-direct-preference-optimization310/bin/activa
 # python new_scripts/upload.py outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-84000 lomahony/pythia-1.4b-helpful-dpo 84000
 # python new_scripts/upload.py outputs/pythia1.4b_dpo_seed0_2024-01-12_00-39-54_703699/step-96000 lomahony/pythia-1.4b-helpful-dpo 96000
 
-# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/LATEST lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo main
-# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-12000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 12000
-# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-24000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 24000
-# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-36000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 36000
-# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-48000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 48000
-# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-60000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 60000
-# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-72000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 72000
-# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-84000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 84000
-# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-96000 lomahony/pythia-pythia2.8b_dpo_seed2.8b-helpful-dpo 96000
+# python new_scripts/upload.py outputs/0_2024-01-12_00-15-25_539956/LATEST lomahony/pythia-2.8b-helpful-dpo main
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-12000 lomahony/pythia-2.8b-helpful-dpo 12000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-24000 lomahony/pythia-2.8b-helpful-dpo 24000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-36000 lomahony/pythia-2.8b-helpful-dpo 36000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-48000 lomahony/pythia-2.8b-helpful-dpo 48000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-60000 lomahony/pythia-2.8b-helpful-dpo 60000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-72000 lomahony/pythia-2.8b-helpful-dpo 72000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-84000 lomahony/pythia-2.8b-helpful-dpo 84000
+# python new_scripts/upload.py outputs/pythia2.8b_dpo_seed0_2024-01-12_00-15-25_539956/step-96000 lomahony/pythia-2.8b-helpful-dpo 96000
 
 

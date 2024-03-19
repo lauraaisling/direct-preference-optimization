@@ -2,8 +2,8 @@
 # sbatch launches/pt_to_bin.sh
 #Resource Request 
 #SBATCH --account=eleuther
-#SBATCH --job-name=pythia
-#SBATCH --output=dpo-xxx-%x_%j.out   ## filename of the output; the %j is equivalent to jobID; default is slurm-[jobID].out 
+#SBATCH --job-name=pt_to_bin
+#SBATCH --output=slurm_%x_X_%j.out   ## filename of the output; the %j is equivalent to jobID; default is slurm-[jobID].out 
 #SBATCH --partition=a40x ## the partitions to run in (comma seperated) 
 
 #SBATCH --gpus=1 # number of gpus per task 
@@ -26,6 +26,8 @@ export HYDRA_FULL_ERROR=1
 
 # source /admin/home-laura/venvs/venv-direct-preference-optimization/bin/activate
 source /admin/home-laura/venvs/venv-direct-preference-optimization310/bin/activate
+
+################### record 
 
 ##INFO convert trained models from policy.pt to pytorch_model.bin
 # python -u new_scripts/pt_to_bin.py --directory outputs/pythia70m_dpo_seed0_2024-01-12_14-42-12_093994/step-11968 

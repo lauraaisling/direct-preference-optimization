@@ -350,9 +350,21 @@ class BasicTrainer(object):
                     else:
                         #########################################################################################
                         ### Disabling saving model checkpoints as not enough memory
-                        output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
-                        rank0_print(f'creating checkpoint to write to {output_dir}...')
-                        self.save(output_dir, mean_eval_metrics)
+                        if 90000 < self.example_counter < 100000:
+                            output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
+                            rank0_print(f'creating checkpoint to write to {output_dir}...')
+                            self.save(output_dir, mean_eval_metrics)
+                        elif 190000 < self.example_counter < 200000:
+                            output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
+                            rank0_print(f'creating checkpoint to write to {output_dir}...')
+                            self.save(output_dir, mean_eval_metrics)
+                        elif 280000 <self.example_counter > 290000:
+                            output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
+                            rank0_print(f'creating checkpoint to write to {output_dir}...')
+                            self.save(output_dir, mean_eval_metrics)
+                        else:
+                            rank0_print('skipping save for non epoch')
+
                         ### Only save last model checkpoint as not enough memory
                         # if self.example_counter > 160_000: 
                         #     output_dir = os.path.join(self.run_dir, f'step-{self.example_counter}')
@@ -431,12 +443,13 @@ class BasicTrainer(object):
         self.write_state_dict(self.example_counter, policy_state_dict, metrics, 'policy.pt', output_dir)
         del policy_state_dict
 
-        optimizer_state_dict = self.optimizer.state_dict()
-        self.write_state_dict(self.example_counter, optimizer_state_dict, metrics, 'optimizer.pt', output_dir)
-        del optimizer_state_dict
+        # skip saving optimizer and scheduler
+        # optimizer_state_dict = self.optimizer.state_dict()
+        # self.write_state_dict(self.example_counter, optimizer_state_dict, metrics, 'optimizer.pt', output_dir)
+        # del optimizer_state_dict
 
-        scheduler_state_dict = self.scheduler.state_dict()
-        self.write_state_dict(self.example_counter, scheduler_state_dict, metrics, 'scheduler.pt', output_dir)
+        # scheduler_state_dict = self.scheduler.state_dict()
+        # self.write_state_dict(self.example_counter, scheduler_state_dict, metrics, 'scheduler.pt', output_dir)
 
 
 class FSDPTrainer(BasicTrainer):
@@ -517,19 +530,19 @@ class FSDPTrainer(BasicTrainer):
         del policy_state_dict
         dist.barrier()
 
-        save_policy = FullOptimStateDictConfig(offload_to_cpu=True, rank0_only=True)
-        with FSDP.state_dict_type(self.policy, StateDictType.FULL_STATE_DICT, optim_state_dict_config=save_policy):
-            optimizer_state_dict = FSDP.optim_state_dict(self.policy, self.optimizer)
+        # save_policy = FullOptimStateDictConfig(offload_to_cpu=True, rank0_only=True)
+        # with FSDP.state_dict_type(self.policy, StateDictType.FULL_STATE_DICT, optim_state_dict_config=save_policy):
+            # optimizer_state_dict = FSDP.optim_state_dict(self.policy, self.optimizer)
 
-        if self.rank == 0:
-            self.write_state_dict(self.example_counter, optimizer_state_dict, metrics, 'optimizer.pt', output_dir)
-        del optimizer_state_dict
-        dist.barrier()
+        # if self.rank == 0:
+            # self.write_state_dict(self.example_counter, optimizer_state_dict, metrics, 'optimizer.pt', output_dir)
+        # del optimizer_state_dict
+        # dist.barrier()
 
-        if self.rank == 0:
-            scheduler_state_dict = self.scheduler.state_dict()
-            self.write_state_dict(self.example_counter, scheduler_state_dict, metrics, 'scheduler.pt', output_dir)
-        dist.barrier()
+        # if self.rank == 0:
+        #     scheduler_state_dict = self.scheduler.state_dict()
+        #     self.write_state_dict(self.example_counter, scheduler_state_dict, metrics, 'scheduler.pt', output_dir)
+        # dist.barrier()
         
 
 class TensorParallelTrainer(BasicTrainer):
