@@ -26,6 +26,8 @@ export HYDRA_FULL_ERROR=1
 # source /admin/home-laura/venvs/venv-direct-preference-optimization/bin/activate
 source /admin/home-laura/venvs/venv-direct-preference-optimization310/bin/activate
 
+python new_scripts/update_branch.py
+
 # python new_scripts/upload.py upload_models/pythia-2.8b-helpful-sfted2-dpo-3epochs-ep1 lomahony/pythia-2.8b-helpful-sfted2-dpo-3epochs 1
 # python new_scripts/upload.py upload_models/pythia-2.8b-helpful-sfted3-dpo-3epochs-ep1 lomahony/pythia-2.8b-helpful-sfted3-dpo-3epochs 1
 # python new_scripts/upload.py upload_models/pythia-2.8b-helpful-sft-3epochs-ep1 lomahony/pythia-2.8b-helpful-sft-3epochs 1
